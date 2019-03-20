@@ -5,8 +5,7 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 import Table from "react-bootstrap/Table";
 import "./table.css";
-import { css, cx } from "emotion";
-const color = "white";
+import TeamHeader from "./components/TeamHeader";
 
 const TeamColors = {
 	"2210410": {
@@ -86,55 +85,14 @@ const App = () => {
 								const { primary, secondary, text } = TeamColors[teamId];
 								return (
 									<Tab eventKey={teamId} title={teamName} key={teamId}>
-										<header
-											className={css`
-												background-color: ${primary};
-												background: linear-gradient(
-															to bottom,
-															${primary} 0%,
-															${primary} 38%,
-															transparent 100%
-														)
-														no-repeat,
-													${secondary};
-												position: relative;
-												display: flex;
-												align-items: center;
-												justify-content: center;
-												text-align: center;
-												padding: 3rem 0px;
-												color: ${text};
-												&::after {
-													content: "";
-													background: url("/img/logos/${teamId}.png") center
-														center/100% no-repeat;
-													opacity: 0.2;
-													top: 0;
-													left: 0;
-													bottom: 0;
-													right: 0;
-													position: absolute;
-													z-index: 0;
-												}
-												>* {
-													z-index: 2;
-												}
-												img {
-													height: 150px;
-												}
-											`}
-										>
-											<div className="container">
-												<img
-													src={`/img/logos/${teamId}.png`}
-													alt={`${teamName} Logo`}
-												/>
-												<h1>{teamName}</h1>
-												<h1 class="page-heading__title">
-													Team <span class="highlight">Schedule</span>
-												</h1>
-											</div>
-										</header>
+										<TeamHeader
+											primaryColor={primary}
+											secondaryColor={secondary}
+											textColor={text}
+											teamId={teamId}
+											teamName={teamName}
+										/>
+
 										<Table
 											responsive
 											className="table table-hover team-schedule team-schedule--full"
@@ -142,51 +100,69 @@ const App = () => {
 											<thead>
 												<tr>
 													<th>Date</th>
-													<th>Versus</th>
-													<th>Status</th>
+													<th>Opponent</th>
 													<th>Time</th>
 													<th>Venue</th>
 												</tr>
 											</thead>
 											<tbody>
-												{games.map(game => {
-													const {
-														gameId,
-														locationName,
-														team1,
-														team1Id,
-														team2,
-														team2Id,
-														startTime
-													} = game;
-													return (
-														<tr key={gameId}>
-															<td>{moment(startTime).format("dddd, MMM D")}</td>
-															<td>
-																<div className="team-meta">
-																	<figure className="team-meta__logo">
-																		<img
-																			src={`/img/logos/${
-																				team1Id === teamId ? team2Id : team1Id
-																			}.png`}
-																			alt={`${teamName} Logo`}
-																		/>
-																	</figure>
-																	<div className="team-meta__info">
-																		<h6 className="team-meta__name">
-																			{team1 === teamName ? team2 : team1}
-																		</h6>
+												{games
+													.sort(function(a, b) {
+														return (
+															moment(a.startTime).format("L") -
+															moment(b.startTime).format("L")
+														);
+													})
+													.map(game => {
+														const {
+															gameId,
+															locationName,
+															team1,
+															team1Id,
+															team2,
+															team2Id,
+															startTime
+														} = game;
+
+														console.log(moment(startTime).format("L"));
+
+														return (
+															<tr key={gameId}>
+																<td>
+																	{moment(startTime).format("dddd, MMMM D")}
+																</td>
+																<td>
+																	<span
+																		style={{
+																			display: "inline",
+																			marginRight: 4
+																		}}
+																	>
+																		{team1 === teamName ? "vs" : "@"}
+																	</span>
+																	<div className="team-meta">
+																		<figure className="team-meta__logo">
+																			<img
+																				src={`/img/logos/${
+																					team1Id === teamId ? team2Id : team1Id
+																				}.png`}
+																				alt={`${teamName} Logo`}
+																			/>
+																		</figure>
+																		<div className="team-meta__info">
+																			<h6 className="team-meta__name">
+																				{team1 === teamName ? team2 : team1}
+																			</h6>
+																		</div>
 																	</div>
-																</div>
-															</td>
-															<td>{team1Id === teamId ? "Home" : "Away"}</td>
-															<td>
-																{`${moment(startTime).format("hh:mm A")} EST`}
-															</td>
-															<td>{locationName}</td>
-														</tr>
-													);
-												})}
+																</td>
+																<td>
+																	{`${moment(startTime).format("hh:mm A")} EST`}
+																</td>
+																<td>{locationName}</td>
+															</tr>
+														);
+													})}
 											</tbody>
 										</Table>
 									</Tab>

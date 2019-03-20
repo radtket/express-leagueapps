@@ -21,6 +21,7 @@ body {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	display: inline;
 }
 
 .team-meta__logo {
@@ -46,6 +47,7 @@ body {
 .team-meta__info {
 	display: inline-block;
 	vertical-align: middle;
+	margin-left: 4px;
 }
 
 .team-meta__name {
@@ -60,28 +62,11 @@ body {
 	display: block;
 	font-size: 9px;
 	line-height: 1.2em;
-	font-family: Montserrat, sans-serif;
 	color: #9a9da2;
 }
 
 
 .page-heading__title {
 	text-transform: uppercase;
-	letter-spacing: -.02em;
-	font-size: 24px;
-	margin-bottom: 0;
-	font-style: normal;
 	font-weight: 700;
-	line-height: 1.1em;
-}
-
-@media (min-width: 992px) {
-
-	.page-heading__title {
-		font-size: 30px;
-	}
-}
-
-.page-heading__title .highlight {
-	color: #c2ff1f;
 }
