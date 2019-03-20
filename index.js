@@ -11,16 +11,25 @@ app.use(express.static(path.join(__dirname, "client/build")));
 
 // An api endpoint that returns a list of teams
 app.get("/api/teams", (req, res) => {
-  axios
-    .get(
-      `https://api.leagueapps.com/v1/sites/6970/programs/1039720/teams?la-api-key=${apiKey}`
-    )
-    .then(response => res.send(response.data));
+	axios
+		.get(
+			`https://api.leagueapps.com/v1/sites/6970/programs/1039720/teams?la-api-key=${apiKey}`
+		)
+		.then(response => res.send(response.data));
+});
+
+// An api endpoint that returns a list of teams
+app.get("/api/schedule", (req, res) => {
+	axios
+		.get(
+			`https://api.leagueapps.com/v1/sites/6970/programs/1039720/schedule?la-api-key=${apiKey}`
+		)
+		.then(response => res.send(response.data.games));
 });
 
 // Handles any requests that don't match the ones above
 app.get("*", (req, res) => {
-  res.sendFile(path.join(`${__dirname}/client/build/index.html`));
+	res.sendFile(path.join(`${__dirname}/client/build/index.html`));
 });
 
 const port = process.env.PORT || 5000;
