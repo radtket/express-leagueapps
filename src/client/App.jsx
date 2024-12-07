@@ -115,7 +115,7 @@ function App() {
                                     <figure className="team-meta__logo">
                                       <img
                                         alt={`${teamName} Logo`}
-                                        src={`/img/logos/${
+                                        src={`/express-leagueapps/img/logos/${
                                           team1Id === teamId ? team2Id : team1Id
                                         }.png`}
                                       />

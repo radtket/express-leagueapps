@@ -85,7 +85,10 @@ function TeamHeader({ teamId, teamName }) {
   return (
     <StyledHeader {...{ teamId }}>
       <div className="container">
-        <img alt={`${teamName} Logo`} src={`/img/logos/${teamId}.png`} />
+        <img
+          alt={`${teamName} Logo`}
+          src={`/express-leagueapps/img/logos/${teamId}.png`}
+        />
         <h2>{teamName}</h2>
         <h4 className="page-heading__title">Team Schedule</h4>
       </div>

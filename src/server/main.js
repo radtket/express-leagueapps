@@ -26,6 +26,7 @@ app.get("/hello", async (req, res) => {
 
   res.send(woo);
 });
+ViteExpress.config({ mode: "production" });
 
 ViteExpress.listen(app, 3000, () =>
   console.log("Server is listening on port 3000...")
