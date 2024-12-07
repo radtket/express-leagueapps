@@ -1,5 +1,5 @@
 {
-	"parser": "babel-eslint",
+	"parser": "@babel/eslint-parser",
 	"env": {
 		"browser": true,
 		"es6": true,
@@ -13,19 +13,25 @@
 	"parserOptions": {
 		"sourceType": "module",
 		"ecmaVersion": 8,
+		"babelOptions": {
+      "presets": [
+        "@babel/preset-react"
+      ]
+    },
+    "requireConfigFile": false,
 		"ecmaFeatures": {
 			"experimentalObjectRestSpread": true,
 			"impliedStrict": true,
 			"classes": true
 		}
 	},
-	"extends": ["airbnb", "prettier", "prettier/react"],
+	"extends": ["airbnb", "prettier"],
 	"plugins": ["prettier"],
 	"rules": {
 		"comma-dangle": 0,
-		"react/jsx-filename-extension": false,
-		"react/jsx-sort-props": true,
-		"react/prefer-stateless-function": false,
+		"react/jsx-filename-extension": 0,
+		"react/jsx-sort-props": 2,
+		"react/prefer-stateless-function": 0,
 		"no-unused-expressions": ["error", {
 			"allowShortCircuit": true,
 			"allowTernary": true,
