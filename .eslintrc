@@ -1,0 +1,49 @@
+{
+	"parser": "@babel/eslint-parser",
+	"env": {
+		"browser": true,
+		"es6": true,
+		"node": true,
+		"commonjs": true
+	},
+	"settings": {
+		"ecmascript": 6,
+		"jsx": true
+	},
+	"parserOptions": {
+		"sourceType": "module",
+		"ecmaVersion": 8,
+		"babelOptions": {
+      "presets": [
+        "@babel/preset-react"
+      ]
+    },
+    "requireConfigFile": false,
+		"ecmaFeatures": {
+			"experimentalObjectRestSpread": true,
+			"impliedStrict": true,
+			"classes": true
+		}
+	},
+	"extends": ["airbnb", "prettier"],
+	"plugins": ["prettier"],
+	"rules": {
+		"comma-dangle": 0,
+		"react/jsx-filename-extension": 0,
+		"react/jsx-sort-props": 2,
+		"react/prefer-stateless-function": 0,
+		"no-unused-expressions": ["error", {
+			"allowShortCircuit": true,
+			"allowTernary": true,
+			"allowTaggedTemplates": true
+		}],
+		"prettier/prettier": [
+			"error",
+			{
+				"trailingComma": "es5",
+				"printWidth": 80,
+				"jsxBracketSameLine": true
+			}
+		]
+	}
+}
