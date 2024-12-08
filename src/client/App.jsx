@@ -14,7 +14,7 @@ function App() {
   const [schedule, setSchedule] = useState([]);
 
   useEffect(() => {
-    axios("/hello")
+    axios("/express-leagueapps/hello")
       .then(({ data }) => {
         const teams = keyBy(data.teams, "teamId");
 
