@@ -11,7 +11,7 @@ const api = axios.create({
 
 const app = express();
 
-app.get("/hello", async (req, res) => {
+app.get("/express-leagueapps/hello", async (req, res) => {
   const woo = await Promise.all([api.get("/schedule"), api.get("/teams")]).then(
     ([
       {
